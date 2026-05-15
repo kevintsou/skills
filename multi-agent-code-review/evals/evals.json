@@ -1,0 +1,26 @@
+{
+  "skill_name": "multi-agent-code-review",
+  "evals": [
+    {
+      "id": 0,
+      "prompt": "幫我對 D:\\repo\\Corvia\\test_c_samples\\buffer_overflow.c 做完整的 code review",
+      "expected_output": "Orchestrator 詢問 scope → 使用者選 [4] 自訂目標 → 確認 Phase 1 + Phase 2 → Corvia 找出 buffer overflow → Bug/Security/Style agents 各自補充 → 統一報告分三區塊呈現",
+      "files": ["D:\\repo\\Corvia\\test_c_samples\\buffer_overflow.c"]
+    },
+    {
+      "id": 1,
+      "prompt": "掃描 D:\\repo\\Corvia\\src 這個目錄，我只要靜態分析結果就好",
+      "expected_output": "Orchestrator 詢問 scope → 使用者選 [1] 整個專案或 [4] 自訂目標 → Phase 選擇中只勾選 Phase 1 → 只跑 Corvia → 輸出靜態分析報告，不跑 Claude agents",
+      "files": []
+    },
+    {
+      "id": 2,
+      "prompt": "幫我 review D:\\repo\\Corvia\\test_c_samples\\null_deref.c 和 memory_leak.c，我想要 bug 跟 security 分析，不需要 style",
+      "expected_output": "Orchestrator 選 Scope 4 自訂目標 → Phase 1 + Phase 2，但 Style Agent 不跑（使用者手動指定只要 bug/security）→ 報告只包含 Corvia + Bug Agent + Security Agent 區塊",
+      "files": [
+        "D:\\repo\\Corvia\\test_c_samples\\null_deref.c",
+        "D:\\repo\\Corvia\\test_c_samples\\memory_leak.c"
+      ]
+    }
+  ]
+}
