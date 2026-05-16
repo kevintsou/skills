@@ -115,7 +115,7 @@ extension). Extract the file paths and content from context.
 ### Phase 1 — Corvia Static Analysis (if selected)
 
 Read the agent instructions from:
-`D:\repo\skills_and_agent\multi-agent-code-review\agents\corvia-agent.md`
+`agents/corvia-agent.md`
 
 Spawn a **Corvia Agent** subagent with the following context:
 - Target: `<target>` or `<target_files>` from Step 3
@@ -132,10 +132,10 @@ and note this in the final report. Do **not** abort — proceed to Phase 2 if se
 ### Phase 2 — Claude Deep Analysis (if selected)
 
 Read each agent's instructions before spawning:
-- `D:\repo\skills_and_agent\multi-agent-code-review\agents\line-bug-agent.md`
-- `D:\repo\skills_and_agent\multi-agent-code-review\agents\bug-agent.md`
-- `D:\repo\skills_and_agent\multi-agent-code-review\agents\security-agent.md`
-- `D:\repo\skills_and_agent\multi-agent-code-review\agents\style-agent.md`
+- `agents/line-bug-agent.md`
+- `agents/bug-agent.md`
+- `agents/security-agent.md`
+- `agents/style-agent.md`
 
 Spawn all **four agents in parallel** (same turn), each receiving:
 - The target code content (files or diff from Step 3)
@@ -162,17 +162,17 @@ After spawning the three agents, you may optionally monitor their progress:
 
 ```powershell
 # PowerShell (Windows)
-& "D:\repo\skills_and_agent\multi-agent-code-review\monitoring\Wait-Agents.ps1" -Timeout 600
+& "monitoring/Wait-Agents.ps1" -Timeout 600
 ```
 
 ```bash
 # Python (Cross-platform)
-python "D:\repo\skills_and_agent\multi-agent-code-review\monitoring\wait_agents.py" --timeout 600
+python "monitoring/wait_agents.py" --timeout 600
 ```
 
 ```bash
 # Bash (Unix/Linux/macOS)
-bash "D:\repo\skills_and_agent\multi-agent-code-review\monitoring\wait-agents.sh" 600
+bash "monitoring/wait-agents.sh" 600
 ```
 
 See `monitoring/README.md` for detailed usage instructions and troubleshooting.
