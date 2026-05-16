@@ -45,13 +45,12 @@ and stop.
 Run corvia on `<target>` (passed in by the orchestrator — a path, list of files, or directory):
 
 ```bash
-corvia <target> --format json
+corvia <target> --use-cpp --incremental --format json -o <target_name>_corvia_result.json
 ```
 
-For large projects (Scope 1 — whole project), add `--incremental` to leverage caching:
-```bash
-corvia <target> --format json --incremental
-```
+- `--use-cpp` — run the C preprocessor before parsing (required for accurate macro/include resolution)
+- `--incremental` — reuse cached results for unchanged files (SHA-256 hash); always use for efficiency
+- `-o` — save JSON output to file so Phase 2 agents can consume it
 
 If the user passed extra flags in their original request, append them.
 
