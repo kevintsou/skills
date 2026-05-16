@@ -25,6 +25,20 @@ This skill **combines** both approaches and adds parallel Claude agents on top.
 
 ---
 
+## Step 0 — Record Start Time
+
+Before doing anything else, record the current time as `<start_time>`:
+
+```python
+from datetime import datetime
+start_time = datetime.now()
+print(start_time.strftime("%Y-%m-%d %H:%M:%S"))
+```
+
+Store this as `<start_time>`. This will be used to compute total elapsed time in the final report.
+
+---
+
 ## Step 1 — Scope Selection
 
 Present the following options to the user:
@@ -303,5 +317,27 @@ Severity: critical | warning
 **Top offending files：** *(列出問題最多的前 3 個檔案)*
 
 **行動建議：** *(一段簡短的優先修復建議)*
+
+---
+
+### ⏱️ 執行時間
+
+計算從 `<start_time>` 到報告產出的總耗時：
+
+```python
+from datetime import datetime
+end_time = datetime.now()
+elapsed = end_time - start_time
+minutes, seconds = divmod(int(elapsed.total_seconds()), 60)
+print(f"開始：{start_time.strftime('%H:%M:%S')}")
+print(f"結束：{end_time.strftime('%H:%M:%S')}")
+print(f"總耗時：{minutes}m {seconds}s")
+```
+
+| 項目 | 時間 |
+|------|------|
+| 開始時間 | `<start_time>` |
+| 結束時間 | `<end_time>` |
+| **總耗時** | **`Xm Ys`** |
 
 ---
