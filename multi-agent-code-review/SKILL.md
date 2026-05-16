@@ -132,16 +132,26 @@ and note this in the final report. Do **not** abort — proceed to Phase 2 if se
 ### Phase 2 — Claude Deep Analysis (if selected)
 
 Read each agent's instructions before spawning:
+- `D:\repo\skills_and_agent\multi-agent-code-review\agents\line-bug-agent.md`
 - `D:\repo\skills_and_agent\multi-agent-code-review\agents\bug-agent.md`
 - `D:\repo\skills_and_agent\multi-agent-code-review\agents\security-agent.md`
 - `D:\repo\skills_and_agent\multi-agent-code-review\agents\style-agent.md`
 
-Spawn all three agents **in parallel** (same turn), each receiving:
+Spawn all **four agents in parallel** (same turn), each receiving:
 - The target code content (files or diff from Step 3)
 - `<corvia_results>` — so each agent knows what Corvia already found and can focus elsewhere
 - Any `REVIEW_RULES.md` found in the project root or current directory
 
+**Agent responsibilities (no overlap):**
+| Agent | Focus |
+|-------|-------|
+| `line-bug-agent` | Line-by-line: dead boolean, off-by-one, type misuse, missing checks, single-function control flow |
+| `bug-agent` | Cross-function: dataflow bugs, loop index after break, unhandled error paths, dynamic buffer overflows |
+| `security-agent` | Security: OWASP, crypto, trust boundaries, injection, sensitive data |
+| `style-agent` | Maintainability: naming, documentation, complexity, magic numbers |
+
 Each agent returns a structured findings list. Collect as:
+- `<line_bug_findings>`
 - `<bug_findings>`
 - `<security_findings>`
 - `<style_findings>`
@@ -181,6 +191,31 @@ Before writing the report, scan all findings for duplicates:
 
 ## Step 6 — Output the Final Report
 
+### Save as Markdown File
+
+After generating the report, **always save it as a `.md` file** using this naming rule:
+
+```
+<target_name>_corvia_review.md
+```
+
+Where `<target_name>` is derived from the scan target:
+- **Single file** (e.g. `src/main.c`) → `main_corvia_review.md`
+- **Directory** (e.g. `D:\repo\project\lcp`) → `lcp_corvia_review.md`
+- **Git uncommitted** → `git_uncommitted_corvia_review.md`
+- **VSCode files** → `vscode_files_corvia_review.md`
+
+Save the file **in the same directory as the target** (or the current working directory if target is a single file or git diff).
+
+Example save command:
+```bash
+# Target: D:\repo\project\lcp  → save as lcp_corvia_review.md in same directory
+```
+
+Then inform the user of the saved file path.
+
+---
+
 Use this exact structure:
 
 ---
@@ -209,8 +244,21 @@ Use this exact structure:
 ### Phase 2 — 深度分析結果 (Claude Agents)
 *(如未執行則標註 "未執行")*
 
+#### 🔍 Line-Level Bug Issues
+*(Line-Bug Agent 發現：dead boolean、off-by-one、型別誤用、單函數控制流錯誤、防禦性缺失)*
+
+**[Issue title]** — `file`, line XX
+Severity: critical | warning
+> 說明確切的變數、條件或表達式問題。
+> 解釋為何有問題 — 哪個值造成失敗，後果是什麼。
+> **建議修復：** ...
+
+*(無則寫 "None")*
+
+---
+
 #### 🐛 Bug & Logic Issues
-*(Bug Agent 發現，排除 Corvia 已涵蓋的項目)*
+*(Bug Agent 發現：跨函數 dataflow、迴圈後索引使用、未處理錯誤路徑、動態 buffer overflow)*
 
 **[Issue title]** — `file`, line XX
 > 說明問題所在與影響。
@@ -247,6 +295,7 @@ Use this exact structure:
 | 類別 | 問題數 |
 |------|--------|
 | 🔴 Critical (Corvia errors + Bug Agent critical) | X |
+| 🔍 Line-Level Bugs | X |
 | ⚠️ Warnings | Y |
 | 🔐 Security | Z |
 | 💡 Style / Info | W |
