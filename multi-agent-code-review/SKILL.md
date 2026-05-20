@@ -1,6 +1,6 @@
 ---
 name: multi-agent-code-review
-version: 1.3.0
+version: 1.4.0
 description: >
   Comprehensive multi-agent code review for C/C++ and Python projects.
   Combines Corvia static analysis (Phase 1) with parallel Claude deep-analysis
@@ -237,7 +237,7 @@ Use this exact structure:
 
 ## 🔍 Multi-Agent Code Review Report
 
-**Skill 版本：** `v1.3.0`
+**Skill 版本：** `v1.4.0`
 **審查範圍：** `<scope description>`
 **執行 Phase：** `<Phase 1 / Phase 2 / Both>`
 **規則來源：** `<REVIEW_RULES.md path>` *(或 "general best practices")*
