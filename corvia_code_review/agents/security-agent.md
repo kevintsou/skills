@@ -59,8 +59,8 @@ Focus on what remains:
 When reviewing C code for security-sensitive MISRA violations beyond what Corvia caught,
 refer to the MISRA C:2012 example suite:
 
-- Location: `D:\repo\skills_and_agent\code-review\Example-Suite-master\`
-- Usage guide: `D:\repo\skills_and_agent\code-review\references\misra-c-examples.md`
+- Location: `references/Example-Suite-master/`
+- Usage guide: `references/misra-c-examples.md`
 
 Consult these only when you need to verify whether a specific pattern constitutes a
 MISRA violation that has security implications (e.g., pointer arithmetic, type conversions).
