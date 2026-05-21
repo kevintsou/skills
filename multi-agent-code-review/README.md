@@ -1,4 +1,4 @@
-# multi-agent-code-review
+# corvia_code_review
 
 > **Version:** v1.4.0
 
@@ -35,7 +35,7 @@ Phase 2 agents receive Corvia's findings so they can focus on what static analys
 | English | `comprehensive review` |
 | English | `review my project` |
 | English | `multi-agent review` |
-| Direct | `/multi-agent-code-review` |
+| Direct | `/corvia_code_review` |
 
 ---
 
@@ -66,7 +66,7 @@ Step 6  Output report → saved as <target>_corvia_review.md
 
 ```bash
 # Install to Claude Code skills directory
-cp -r multi-agent-code-review ~/.claude/skills/
+cp -r corvia_code_review ~/.claude/skills/
 ```
 
 ### Corvia Dependency (Phase 1)
@@ -115,7 +115,7 @@ Report is saved as: `<target_name>_corvia_review.md` in the target directory.
 ## File Structure
 
 ```
-multi-agent-code-review/
+corvia_code_review/
 ├── SKILL.md                    Orchestrator — main workflow
 ├── README.md                   This file
 ├── agents/

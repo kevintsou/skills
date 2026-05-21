@@ -1,5 +1,5 @@
 ---
-name: multi-agent-code-review
+name: corvia_code_review
 version: 1.4.0
 description: >
   Comprehensive multi-agent code review for C/C++ and Python projects.
