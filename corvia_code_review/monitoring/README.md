@@ -106,7 +106,7 @@ Agents: ad18b41a80c0d1de0, a842e402b5e13aa86, aee5e5ec6b0c44dcc
 ### Python Output
 ```
 ⏳ Waiting for Phase 2 agents to complete (timeout: 600s)...
-📁 Output directory: C:\Users\kevin_tsou\...\tasks
+📁 Output directory: C:\Users\<username>\AppData\Local\Temp\claude\...\tasks
 🤖 Agents: ad18b41a80c0d1de0, a842e402b5e13aa86, aee5e5ec6b0c44dcc
 
 [14:32:15] Status (elapsed: 0s)
@@ -156,13 +156,12 @@ After launching Phase 2 agents, monitor their completion:
 
 **PowerShell:**
 ```powershell
-$multiAgentDir = Get-Item "D:\repo\skills_and_agent\multi-agent-code-review"
-& "$multiAgentDir\monitoring\Wait-Agents.ps1" -Timeout 600
+& "monitoring/Wait-Agents.ps1" -Timeout 600
 ```
 
 **Python:**
 ```bash
-python D:\repo\skills_and_agent\multi-agent-code-review\monitoring\wait_agents.py --timeout 600
+python "monitoring/wait_agents.py" --timeout 600
 ```
 ```
 
